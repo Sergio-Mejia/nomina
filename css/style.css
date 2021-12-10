@@ -1,0 +1,30 @@
+#mostrar1 {
+    position: relative;
+    left: 50%;
+}
+
+body {
+    background-color: azure;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    position: relative;
+    top: 120px;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+table {
+    position: relative;
+    top: 120px;
+    border: 3px solid #cca633;
+    padding: 20px 50px;
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color: #edf797;
+}
+
