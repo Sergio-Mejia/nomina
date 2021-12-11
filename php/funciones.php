@@ -58,15 +58,15 @@ function total_nomina($devengado, $deducciones){
 }
 
 //prestaciones 
-function prima_cesantias ($salario, $auxiolio_transporte){
-    return ($salario + $auxiolio_transporte) * 0.083;
+function prima_cesantias ($salario, $aux_transporte){
+    return ($salario + $aux_transporte) * 0.083;
 } 
 
 function intereses($cesantias, $dias){
     return ($cesantias * $dias * 0.12)/360;
 }
 
-function vacaiones2 ($salario){
+function vacaciones2 ($salario){
     return $salario * 0.0417;
 }
 

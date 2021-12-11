@@ -128,16 +128,19 @@ if (isset($_POST['enviar'])) {
 
     $devengados = total_devengados($saldo, vacaciones($saldo, $days), auxilio_transporte($saldo), auxilio_alimentacion($saldo, $days));
     $deducciones = total_deducciones(salud_pension($saldo), fondo_solidaridad($saldo));
-
+    $prima_ces = prima_cesantias($saldo, auxilio_transporte($saldo));
+    $cMensual = costoMensual($devengados, total_pres($prima_ces, intereses($prima_ces,$days), vacaciones2($saldo)));
 
     //insertamos datos de registro al mysql xampp, indicando nombre de la tabla y sus atributos
-    $instruccion_SQL = "INSERT INTO `empleado`(`Nombre`, `Cedula`, `Centro de costo`, `Cargo`, `Sueldo`, `Dias`, `salario_dias`, `auxilio_transporte`,
-    `auxilio_alimentacion`,`total_devengado`,`salud`,`pension`,`fondo_solidaridad_pensional`,`total_deduccions`,`total_nomina`)
+    $instruccion_SQL = "INSERT INTO `empleado`(`Nombre`, `Cedula`, `Centro de costo`, `Cargo`, `Sueldo`, `Dias`, `salario_dias`,
+     `auxilio_transporte`,`auxilio_alimentacion`,`total_devengado`,`salud`,`pension`,`fondo_solidaridad_pensional`,`total_deduccions`,
+     `total_nomina`,`prima`,`cesantias`,`intereses_cesantias`,`vacaciones`,`Totales`,`Costo_diario`,`costo_mensual`,`Costo_Anual`)
                         VALUES ('$nombre','$cedula','$ccosto','$cargo','$saldo','$days'," . salario_dias($saldo, $days) . ", " . auxilio_transporte($saldo) . "," . auxilio_alimentacion($saldo, $days) . ",
                         '$devengados'," . salud_pension($saldo) . ", " . salud_pension($saldo) . ", " . fondo_solidaridad($saldo) . ",
-                        '$deducciones', " . total_nomina($devengados, $deducciones) . ")";
+                        '$deducciones', " . total_nomina($devengados, $deducciones) . ", '$prima_ces', '$prima_ces', ".intereses($prima_ces,$days).",
+                        ".vacaciones2($saldo).", ".total_pres($prima_ces, intereses($prima_ces,$days), vacaciones2($saldo)).",
+                        ".costoDiario($cMensual).", '$cMensual', ".costoAnual($cMensual).")";
 
-    $i2 = "INSERT INTO `prueba` VALUES (" . salario_dias($saldo, $days) . ")";
     $resultado = mysqli_query($connection, $instruccion_SQL);
     if ($resultado == 1) {
         echo "<script>alert('El usuario se registró correctamente')</script>";
@@ -148,6 +151,5 @@ if (isset($_POST['enviar'])) {
 }
 
 //echo "resultado: ". salario_dias($saldo,$days);
-/*,`prima`,`cesantias`,
-`intereses_cesantias`,`vacaciones`,`Totales`,`Costo_diario`,`costo_mesual`,`Costo_Anual`*/
+
 ?>
