@@ -12,11 +12,11 @@
 
 <body>
     <nav class=" navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href ="#">Registar</a>
+        <a class="navbar-brand" href="#">Registar</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="php/mostrar.php">Datos</a></li>
-                
+
             </ul>
         </div>
     </nav>
@@ -103,17 +103,17 @@
 </html>
 
 <?php
-include ('php/funciones.php');
+include('php/funciones.php');
 if (isset($_POST['enviar'])) {
     //validamos datos del servidor
     $user = "root";
     $pass = "";
     $host = "localhost";
 
-    //conetamos al base datos
+    //conectamos la base datos
     $connection = mysqli_connect($host, $user, $pass);
 
-    //hacemos llamado al imput de formuario
+    //hacemos llamado al input de formuario
     $nombre = $_POST["nombre"];
     $cedula = $_POST["cedula"];
     $ccosto = $_POST["Ccosto"];
@@ -123,15 +123,21 @@ if (isset($_POST['enviar'])) {
 
     //indicamos el nombre de la base datos
     $datab = "nominausuarios";
-    //indicamos selecionar ala base datos
+    //selecionar la base datos
     $db = mysqli_select_db($connection, $datab);
 
-    //insertamos datos de registro al mysql xamp, indicando nombre de la tabla y sus atributos
-    $instruccion_SQL = "INSERT INTO `empleado`(`Nombre`, `Cedula`, `Centro de costo`, `Cargo`, `Sueldo`, `Dias`, `salario_dias`, `auxilio_transporte`,
-    `auxilio_alimentacion`)
-                        VALUES ('$nombre','$cedula','$ccosto','$cargo','$saldo','$days',". salario_dias($saldo,$days). ", ". auxilio_transporte($saldo).",". auxilio_alimentacion($saldo, $days).")";
+    $devengados = total_devengados($saldo, vacaciones($saldo, $days), auxilio_transporte($saldo), auxilio_alimentacion($saldo, $days));
+    $deducciones = total_deducciones(salud_pension($saldo), fondo_solidaridad($saldo));
 
-    $i2 = "INSERT INTO `prueba` VALUES (". salario_dias($saldo,$days). ")";
+
+    //insertamos datos de registro al mysql xampp, indicando nombre de la tabla y sus atributos
+    $instruccion_SQL = "INSERT INTO `empleado`(`Nombre`, `Cedula`, `Centro de costo`, `Cargo`, `Sueldo`, `Dias`, `salario_dias`, `auxilio_transporte`,
+    `auxilio_alimentacion`,`total_devengado`,`salud`,`pension`,`fondo_solidaridad_pensional`,`total_deduccions`,`total_nomina`)
+                        VALUES ('$nombre','$cedula','$ccosto','$cargo','$saldo','$days'," . salario_dias($saldo, $days) . ", " . auxilio_transporte($saldo) . "," . auxilio_alimentacion($saldo, $days) . ",
+                        '$devengados'," . salud_pension($saldo) . ", " . salud_pension($saldo) . ", " . fondo_solidaridad($saldo) . ",
+                        '$deducciones', " . total_nomina($devengados, $deducciones) . ")";
+
+    $i2 = "INSERT INTO `prueba` VALUES (" . salario_dias($saldo, $days) . ")";
     $resultado = mysqli_query($connection, $instruccion_SQL);
     if ($resultado == 1) {
         echo "<script>alert('El usuario se registró correctamente')</script>";
@@ -142,6 +148,6 @@ if (isset($_POST['enviar'])) {
 }
 
 //echo "resultado: ". salario_dias($saldo,$days);
-/*,`total_devengado`,`salud`,`pension`,`fondo_solidaridad_pensional`,`total_deducciones`,`total_nomina`,`prima`,`cesantias`,
+/*,`prima`,`cesantias`,
 `intereses_cesantias`,`vacaciones`,`Totales`,`Costo_diario`,`costo_mesual`,`Costo_Anual`*/
 ?>

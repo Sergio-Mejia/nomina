@@ -25,8 +25,8 @@ function auxilio_alimentacion($salario,$dias){
     }
 }
 
-function total_devengados($salario, $vacaciones, $auxiolio_transporte, $auxiolio_alimento, $pagoARL, $pagoEPS, $recargo_Noc, $Dominicales){
-    return $salario + $vacaciones + $auxiolio_transporte + $auxiolio_alimento + $pagoARL + $pagoEPS +  $recargo_Noc + $Dominicales;
+function total_devengados($salario, $vacaciones, $auxiolio_transporte, $auxiolio_alimento/*, $pagoARL, $pagoEPS, $recargo_Noc, $Dominicales*/){
+    return $salario + $vacaciones + $auxiolio_transporte + $auxiolio_alimento/* + $pagoARL + $pagoEPS +  $recargo_Noc + $Dominicales*/;
 }
 
 function vacaciones($salario, $dias_va){
@@ -48,8 +48,8 @@ function fondo_solidaridad($salario){
     }
 }
 
-function total_deducciones($salud, $pension, $fondo, $cuota){
-    return $salud + $pension + $fondo + $cuota;
+function total_deducciones($salud, $fondo, /*$cuota*/){
+    return ($salud*2) + $fondo /*+ $cuota*/;
 }
 
 function total_nomina($devengado, $deducciones){
