@@ -128,8 +128,7 @@ if (isset($_POST['enviar'])) {
 
     //insertamos datos de registro al mysql xamp, indicando nombre de la tabla y sus atributos
     $instruccion_SQL = "INSERT INTO `empleado`(`Nombre`, `Cedula`, `Centro de costo`, `Cargo`, `Sueldo`, `Dias`, `salario_dias`, `auxilio_transporte`,
-    `auxilio_alimentacion`,`total_devengado`,`salud`,`pension`,`fondo_solidaridad_pensional`,`total_deducciones`,`total_nomina`,`prima`,`cesantias`,
-    `intereses_cesantias`,`vacaciones`,`Totales`,`Costo_diario`,`costo_mesual`,`Costo_Anual`)
+    `auxilio_alimentacion`)
                         VALUES ('$nombre','$cedula','$ccosto','$cargo','$saldo','$days',". salario_dias($saldo,$days). ", ". auxilio_transporte($saldo).",". auxilio_alimentacion($saldo, $days).")";
 
     $i2 = "INSERT INTO `prueba` VALUES (". salario_dias($saldo,$days). ")";
@@ -142,6 +141,7 @@ if (isset($_POST['enviar'])) {
     mysqli_close($connection);
 }
 
-echo "resultado: ". salario_dias($saldo,$days);
-
+//echo "resultado: ". salario_dias($saldo,$days);
+/*,`total_devengado`,`salud`,`pension`,`fondo_solidaridad_pensional`,`total_deducciones`,`total_nomina`,`prima`,`cesantias`,
+`intereses_cesantias`,`vacaciones`,`Totales`,`Costo_diario`,`costo_mesual`,`Costo_Anual`*/
 ?>
