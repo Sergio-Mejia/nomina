@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="php/mostrar.php">Datos</a></li>
-
+                <li class="nav-item"><a class="nav-link" href="php/prestamos.php">Préstamos</a></li>
             </ul>
         </div>
     </nav>
@@ -90,13 +90,9 @@
                 <td align="center">
                     <input type="reset" name="borrar" id="borrar" value="Restablecer" />
                 </td>
-
-
             </tr>
         </table>
     </form>
-
-
 
 </body>
 

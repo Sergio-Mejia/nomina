@@ -9,11 +9,11 @@
         <a class="navbar-brand" href ="../index.php">Registar</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="#">Informacion General</a></li>
+                <li class="nav-item"><a class="nav-link" href="./mostrar.php">Datos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Préstamos</a></li>
             </ul>
         </div>
     </nav>
-
 </body>
 
 </html>
@@ -29,7 +29,7 @@ echo "<br>";
 echo "<br>";
 //conetamos al base datos
 $connection = mysqli_connect($host, $user, $pass);
-    $datab = "Nomina";
+    $datab = "usuariosnomina";
     //indicamos selecionar ala base datos
     $db = mysqli_select_db($connection,$datab);
 
