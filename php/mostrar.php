@@ -9,35 +9,25 @@
         <a class="navbar-brand" href ="../index.php">Registar</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="#">Informacion General</a></li>
+                <li class="nav-item"><a class="nav-link" href="./mostrar.php">Datos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Préstamos</a></li>
             </ul>
         </div>
     </nav>
-
+    <br><br><br>
 </body>
 
 </html>
 
 <?php
-//validamos datos del servidor
-$user = "root";
-$pass = "";
-$host = "localhost";
+include('./conexion.php');
 
-echo "<br>";
-echo "<br>";
-echo "<br>";
-//conetamos al base datos
-$connection = mysqli_connect($host, $user, $pass);
-    $datab = "Nomina";
-    //indicamos selecionar ala base datos
-    $db = mysqli_select_db($connection,$datab);
+$conex = conectar();
 
-    $consulta = "SELECT * FROM empleado";
+$consulta = "SELECT * FROM empleado";
 
 
-
-$result = mysqli_query($connection,$consulta);
+$result = mysqli_query($conex,$consulta);
 if(!$result) 
 {
     echo "No se ha podido realizar la consulta";
@@ -68,7 +58,7 @@ while ($colum = mysqli_fetch_array($result))
 }
 echo "</table>";
 
-mysqli_close( $connection );
+mysqli_close( $conex );
 
 ?>
 

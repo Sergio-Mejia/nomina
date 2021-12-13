@@ -12,11 +12,11 @@
 
 <body>
     <nav class=" navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href ="#">Registar</a>
+        <a class="navbar-brand" href="#">Registar</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="php/mostrar.php">Datos</a></li>
-                
+                <li class="nav-item"><a class="nav-link" href="php/prestamos.php">Préstamos</a></li>
             </ul>
         </div>
     </nav>
@@ -80,6 +80,32 @@
                 </td>
             </tr>
             <tr>
+                <td>Dias Vacaciones:</td>
+                <td><input type="number" name="vaca" id="vaca"></td>
+            </tr>
+            <tr>
+                <td>Dominicales:</td>
+                <td><input type="number" name="domi" id="domi"></td>
+            </tr>
+            <tr>
+                <td>Dias incapacidad Eps:</td>
+                <td>
+                    <input type="number" name="eps" id="eps">
+                </td>
+            </tr>
+            <tr>
+                <td>Dias incapacidad Arl:</td>
+                <td>
+                    <input type="number" name="arl" id="arl">
+                </td>
+            </tr>
+            <tr>
+                <td>Horas Nocturnas</td>
+                <td>
+                    <input type="number" name="nocturn" id="nocturn">
+                </td>
+            </tr>
+            <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
@@ -90,58 +116,62 @@
                 <td align="center">
                     <input type="reset" name="borrar" id="borrar" value="Restablecer" />
                 </td>
-
-
             </tr>
         </table>
     </form>
-
-
 
 </body>
 
 </html>
 
 <?php
-include ('php/funciones.php');
+
+include('php/funciones.php');
+include('php/conexion.php');
 if (isset($_POST['enviar'])) {
-    //validamos datos del servidor
-    $user = "root";
-    $pass = "";
-    $host = "localhost";
+   
+    $conex = conectar();
 
-    //conetamos al base datos
-    $connection = mysqli_connect($host, $user, $pass);
-
-    //hacemos llamado al imput de formuario
+    //hacemos llamado al input de formuario
     $nombre = $_POST["nombre"];
     $cedula = $_POST["cedula"];
     $ccosto = $_POST["Ccosto"];
     $cargo = $_POST["Cargo"];
     $saldo = $_POST["Saldo"];
     $days = $_POST["daysa"];
+    $vaca = $_POST['vaca'];
+    $domin = $_POST['domi'];
+    $eps = $_POST['eps'];
+    $arl = $_POST['arl'];
+    $nocturna = $_POST['nocturn'];
 
-    //indicamos el nombre de la base datos
-    $datab = "nominausuarios";
-    //indicamos selecionar ala base datos
-    $db = mysqli_select_db($connection, $datab);
+    if(($days+$vaca+$eps+$arl)<=30){
 
-    //insertamos datos de registro al mysql xamp, indicando nombre de la tabla y sus atributos
-    $instruccion_SQL = "INSERT INTO `empleado`(`Nombre`, `Cedula`, `Centro de costo`, `Cargo`, `Sueldo`, `Dias`, `salario_dias`, `auxilio_transporte`,
-    `auxilio_alimentacion`)
-                        VALUES ('$nombre','$cedula','$ccosto','$cargo','$saldo','$days',". salario_dias($saldo,$days). ", ". auxilio_transporte($saldo).",". auxilio_alimentacion($saldo, $days).")";
-
-    $i2 = "INSERT INTO `prueba` VALUES (". salario_dias($saldo,$days). ")";
-    $resultado = mysqli_query($connection, $instruccion_SQL);
-    if ($resultado == 1) {
-        echo "<script>alert('El usuario se registró correctamente')</script>";
+        $devengados = total_devengados(salario_dias($saldo, $days), vacaciones($saldo, $vaca), auxilio_transporte($saldo), auxilio_alimentacion($saldo, $days), incapacidad($saldo, $eps), incapacidad($saldo, $arl), nocturno($saldo, $nocturna), dominicales($saldo, $domin));
+        $deducciones = total_deducciones(salud_pension($saldo), fondo_solidaridad($saldo));
+        $prima_ces = prima_cesantias($saldo, auxilio_transporte($saldo));
+        $cMensual = costoMensual($devengados, total_pres($prima_ces, intereses($prima_ces,$days), vacaciones2($saldo)));
+    
+        //insertamos datos de registro al mysql xampp, indicando nombre de la tabla y sus atributos
+        $instruccion_SQL = "INSERT INTO `empleado`(`Nombre`, `Cedula`, `Centro de costo`, `Cargo`, `Sueldo`, `Dias`, `salario_dias`, `vacacionesD`,
+         `auxilio_transporte`, `Eps`,`arl`, `Rnocturno`,`Dominicales`,`auxilio_alimentacion`,`total_devengado`,`salud`,`pension`,`fondo_solidaridad_pensional`,`total_deduccions`,
+         `total_nomina`,`prima`,`cesantias`,`intereses_cesantias`,`vacaciones`,`Totales`,`Costo_diario`,`costo_mensual`,`Costo_Anual`)
+                            VALUES ('$nombre','$cedula','$ccosto','$cargo','$saldo','$days'," . salario_dias($saldo, $days) . ", ".vacaciones($saldo, $vaca)."," . auxilio_transporte($saldo) . "
+                            ,".incapacidad($saldo, $eps).",".incapacidad($saldo,$arl).",".nocturno($saldo, $nocturna).",".dominicales($saldo, $domin)."," . auxilio_alimentacion($saldo, $days) . ",
+                            '$devengados'," . salud_pension($saldo) . ", " . salud_pension($saldo) . ", " . fondo_solidaridad($saldo) . ",
+                            '$deducciones', " . total_nomina($devengados, $deducciones) . ", '$prima_ces', '$prima_ces', ".intereses($prima_ces,$days).",
+                            ".vacaciones2($saldo).", ".total_pres($prima_ces, intereses($prima_ces,$days), vacaciones2($saldo)).",
+                            ".costoDiario($cMensual).", '$cMensual', ".costoAnual($cMensual).")";
+    
+        $resultado = mysqli_query($conex, $instruccion_SQL) or die ("Error en la consulta $sql".mysqli_error($conex));
+        if ($resultado == 1) {
+            echo "<script>alert('El usuario se registró correctamente')</script>";
+        }
+    }else{
+        echo "<script>alert('Se ingresaron más de 30 días laborales')</script>";
     }
 
-
-    mysqli_close($connection);
+   
 }
 
-//echo "resultado: ". salario_dias($saldo,$days);
-/*,`total_devengado`,`salud`,`pension`,`fondo_solidaridad_pensional`,`total_deducciones`,`total_nomina`,`prima`,`cesantias`,
-`intereses_cesantias`,`vacaciones`,`Totales`,`Costo_diario`,`costo_mesual`,`Costo_Anual`*/
 ?>

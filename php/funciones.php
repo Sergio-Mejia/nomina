@@ -48,8 +48,8 @@ function fondo_solidaridad($salario){
     }
 }
 
-function total_deducciones($salud, $pension, $fondo, $cuota){
-    return $salud + $pension + $fondo + $cuota;
+function total_deducciones($salud, $fondo){
+    return ($salud*2) + $fondo;
 }
 
 function total_nomina($devengado, $deducciones){
@@ -58,15 +58,15 @@ function total_nomina($devengado, $deducciones){
 }
 
 //prestaciones 
-function prima_cesantias ($salario, $auxiolio_transporte){
-    return ($salario + $auxiolio_transporte) * 0.083;
+function prima_cesantias ($salario, $aux_transporte){
+    return ($salario + $aux_transporte) * 0.0833;
 } 
 
 function intereses($cesantias, $dias){
     return ($cesantias * $dias * 0.12)/360;
 }
 
-function vacaiones2 ($salario){
+function vacaciones2 ($salario){
     return $salario * 0.0417;
 }
 
@@ -89,7 +89,22 @@ function costoDiario($costoMesual){
     return $costoMesual/30;
 }
 
+function incapacidad($sueldo, $dias){
+    $sdia = $sueldo/30;
+    $aux = $sdia*0.66; 
+    return $aux*$dias;
+}
 
+function nocturno($sueldo, $horas){
+    $hora = ($sueldo/30)/8;
+    $recargo = $hora * 0.35;
+    return $recargo * $horas;
+}
 
+function dominicales($sueldo, $horas){
+    $hora = ($sueldo/30)/8;
+    $recargo = $hora * 0.75;
+    return $recargo * $horas;
+}
 
 ?>
