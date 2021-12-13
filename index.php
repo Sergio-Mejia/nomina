@@ -104,14 +104,10 @@
 
 <?php
 include('php/funciones.php');
+include('php/conexion.php');
 if (isset($_POST['enviar'])) {
-    //validamos datos del servidor
-    $user = "root";
-    $pass = "";
-    $host = "localhost";
-
-    //conectamos la base datos
-    $connection = mysqli_connect($host, $user, $pass);
+   
+    $conex = conectar();
 
     //hacemos llamado al input de formuario
     $nombre = $_POST["nombre"];
@@ -121,10 +117,6 @@ if (isset($_POST['enviar'])) {
     $saldo = $_POST["Saldo"];
     $days = $_POST["daysa"];
 
-    //indicamos el nombre de la base datos
-    $datab = "nominausuarios";
-    //selecionar la base datos
-    $db = mysqli_select_db($connection, $datab);
 
     $devengados = total_devengados($saldo, vacaciones($saldo, $days), auxilio_transporte($saldo), auxilio_alimentacion($saldo, $days));
     $deducciones = total_deducciones(salud_pension($saldo), fondo_solidaridad($saldo));
@@ -141,13 +133,10 @@ if (isset($_POST['enviar'])) {
                         ".vacaciones2($saldo).", ".total_pres($prima_ces, intereses($prima_ces,$days), vacaciones2($saldo)).",
                         ".costoDiario($cMensual).", '$cMensual', ".costoAnual($cMensual).")";
 
-    $resultado = mysqli_query($connection, $instruccion_SQL);
+    $resultado = mysqli_query($conex, $instruccion_SQL) or die ("Error en la consulta $sql".mysqli_error($conex));
     if ($resultado == 1) {
         echo "<script>alert('El usuario se registró correctamente')</script>";
     }
-
-
-    mysqli_close($connection);
 }
 
 //echo "resultado: ". salario_dias($saldo,$days);
