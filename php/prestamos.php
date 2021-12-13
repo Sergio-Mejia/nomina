@@ -80,6 +80,8 @@
             $resultado = mysqli_query($conex, $sql) or die("Error en la consulta $sql" . mysqli_error($conex));
             echo $resultado;
 
+            
+
             if ($resultado == 1) {
                 echo "<script>alert('El usuario se registró correctamente')</script>";
             }

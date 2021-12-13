@@ -25,8 +25,8 @@ function auxilio_alimentacion($salario,$dias){
     }
 }
 
-function total_devengados($salario, $vacaciones, $auxiolio_transporte, $auxiolio_alimento/*, $pagoARL, $pagoEPS, $recargo_Noc, $Dominicales*/){
-    return $salario + $vacaciones + $auxiolio_transporte + $auxiolio_alimento/* + $pagoARL + $pagoEPS +  $recargo_Noc + $Dominicales*/;
+function total_devengados($salario, $vacaciones, $auxiolio_transporte, $auxiolio_alimento, $pagoARL, $pagoEPS, $recargo_Noc, $Dominicales){
+    return $salario + $vacaciones + $auxiolio_transporte + $auxiolio_alimento + $pagoARL + $pagoEPS +  $recargo_Noc + $Dominicales;
 }
 
 function vacaciones($salario, $dias_va){
@@ -48,8 +48,8 @@ function fondo_solidaridad($salario){
     }
 }
 
-function total_deducciones($salud, $fondo, /*$cuota*/){
-    return ($salud*2) + $fondo /*+ $cuota*/;
+function total_deducciones($salud, $fondo){
+    return ($salud*2) + $fondo;
 }
 
 function total_nomina($devengado, $deducciones){
@@ -89,7 +89,22 @@ function costoDiario($costoMesual){
     return $costoMesual/30;
 }
 
+function incapacidad($sueldo, $dias){
+    $sdia = $sueldo/30;
+    $aux = $sdia*0.66; 
+    return $aux*$dias;
+}
 
+function nocturno($sueldo, $horas){
+    $hora = ($sueldo/30)/8;
+    $recargo = $hora * 0.35;
+    return $recargo * $horas;
+}
 
+function dominicales($sueldo, $horas){
+    $hora = ($sueldo/30)/8;
+    $recargo = $hora * 0.75;
+    return $recargo * $horas;
+}
 
 ?>
