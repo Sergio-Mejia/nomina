@@ -78,13 +78,24 @@
                 `saldoP` ='$saldo' where `Cedula` = '$cedula'";
 
             $resultado = mysqli_query($conex, $sql) or die("Error en la consulta $sql" . mysqli_error($conex));
-            echo $resultado;
 
-            
+            $deducciones = "select `total_deduccions`, `total_nomina` from `empleado` where `Cedula`='$cedula'";
+            $result =  mysqli_query($conex, $deducciones) or die("Error en la consulta $sql" . mysqli_error($conex));
+
+            $row = mysqli_fetch_array($result);
+            $ded = $row['total_deduccions']; 
+            $nom = $row['total_nomina'];
+
+            $ded = $ded + $vcuota;
+            $nom = $nom - $vcuota;
+
+            $sql2 = "update `empleado` set `total_deduccions`= '$ded', `total_nomina`='$nom' where `Cedula` = '$cedula'";
+            mysqli_query($conex, $sql2) or die("Error en la consulta $sql" . mysqli_error($conex));
 
             if ($resultado == 1) {
                 echo "<script>alert('El usuario se registró correctamente')</script>";
             }
+            mysqli_close($conex);
         }
     }
     ?>
