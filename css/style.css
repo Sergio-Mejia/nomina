@@ -1,3 +1,8 @@
+body{
+    background-color: rgb(52, 52, 68);
+}
+
+
 .cont{
     margin: 20px 120px;   
 }
@@ -8,6 +13,8 @@
     padding: 20px;
 }
 
-body{
-    background-color: rgb(52, 52, 68);
+nav{
+    height: 80px;
+    padding: 0px 30px;
 }
+
