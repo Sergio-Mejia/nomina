@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <div>
     <nav class=" navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">Registar</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -20,105 +21,68 @@
             </ul>
         </div>
     </nav>
+    </div>
 
     <a href="#"></a>
-    <h1>Formulario de registro</h1>
-    <form action="" name="" method="POST">
-        <table border="0" align="center">
-            <tr>
-                <td>
-                    Nombre Completo:
-                </td>
-                <td>
-                    <label for="name"></label>
-                    <input type="text" name="nombre" id="name" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Cedula:
-                </td>
-                <td>
-                    <label for="id1"></label>
-                    <input type="text" name="cedula" id="id1" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Centro de costo:
-                </td>
-                <td>
-                    <label for="CentroCosto"></label>
-                    <input type="text" name="Ccosto" id="CentroCosto" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Cargo:
-                </td>
-                <td>
-                    <label for="Cargo"></label>
-                    <input type="text" name="Cargo" id="cargo" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Sueldo:
-                </td>
-                <td>
-                    <label for="sueldo"></label>
-                    <input type="number" name="Saldo" id="sueldo" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Dias:
-                </td>
-                <td>
-                    <label for="dias"></label>
-                    <input type="number" name="daysa" id="dias" />
-                </td>
-            </tr>
-            <tr>
-                <td>Dias Vacaciones:</td>
-                <td><input type="number" name="vaca" id="vaca"></td>
-            </tr>
-            <tr>
-                <td>Dominicales:</td>
-                <td><input type="number" name="domi" id="domi"></td>
-            </tr>
-            <tr>
-                <td>Dias incapacidad Eps:</td>
-                <td>
-                    <input type="number" name="eps" id="eps">
-                </td>
-            </tr>
-            <tr>
-                <td>Dias incapacidad Arl:</td>
-                <td>
-                    <input type="number" name="arl" id="arl">
-                </td>
-            </tr>
-            <tr>
-                <td>Horas Nocturnas</td>
-                <td>
-                    <input type="number" name="nocturn" id="nocturn">
-                </td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td align="center">
-                    <input type="submit" name="enviar" id="enviar" value="Registrarse" />
-                </td>
-                <td align="center">
-                    <input type="reset" name="borrar" id="borrar" value="Restablecer" />
-                </td>
-            </tr>
-        </table>
-    </form>
+    
+    <div class="container">
+        <div class="cont">
+            <h1>Formulario de registro</h1>
+            <hr class="bg bg-light">
+            <form action="" class="row g-3" method="post">
+                <div class="col-md-12">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Cedula</label>
+                    <input type="text" class="form-control" id="id1" name="cedula">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Centro de Costo</label>
+                    <input type="text" name="Ccosto" id="CentroCosto" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Cargo</label>
+                    <input type="text" name="Cargo" id="cargo" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Sueldo</label>
+                    <input type="number" name="Saldo" id="sueldo" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Días Trabajados</label>
+                    <input type="number" name="daysa" id="dias" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Días de Vacaciones</label>
+                    <td><input type="number" name="vaca" id="vaca" class="form-control"></td>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Dominicales</label>
+                    <td><input type="number" name="domi" id="domi" class="form-control"></td>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Días de Incapacidad EPS</label>
+                    <input type="number" name="eps" id="eps" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Días de Incapacidad ARL</label>
+                    <input type="number" name="arl" id="arl" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Horas Nocturnas</label>
+                    <input type="number" name="arl" id="arl" class="form-control">
+                </div>
+                <div class="col-md-6" align="right">
+                    <input type="submit" class="btn btn-success btn-lg" name="enviar" id="enviar" value="Registrarse" />
+                </div>
+                <div class="col-md-6">
+                    <input type="reset" class="btn btn-danger btn-lg"name="borrar" id="borrar" value="Restablecer" />
+                </div>
+            </form>
+        </div>
+    </div>
 
 </body>
 
