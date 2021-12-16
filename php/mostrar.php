@@ -214,7 +214,8 @@ while ($colum = mysqli_fetch_array($result4))
 }
 echo "</table>";
 echo "</div>";
-
+echo "<div align='center'>";
+echo "<a href='./pdf.php' class='btn btn-success btn-lg'  target='_blank' > Imprimir Nómina</a></div><br>";
 mysqli_close( $conex );
 
 ?>

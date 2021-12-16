@@ -31,23 +31,23 @@
             <form action="" class="row g-3" method="post">
                 <div class="col-md-12">
                     <label class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre">
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Cedula</label>
-                    <input type="text" class="form-control" id="id1" name="cedula">
+                    <input type="text" class="form-control" id="id1" name="cedula" required>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Centro de Costo</label>
-                    <input type="text" name="Ccosto" id="CentroCosto" class="form-control" />
+                    <input type="text" name="Ccosto" id="CentroCosto" class="form-control" required/>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Cargo</label>
-                    <input type="text" name="Cargo" id="cargo" class="form-control" />
+                    <input type="text" name="Cargo" id="cargo" class="form-control" required/>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Sueldo</label>
-                    <input type="number" name="Saldo" id="sueldo" class="form-control" />
+                    <input type="number" name="Saldo" id="sueldo" class="form-control" required/>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Días Trabajados</label>

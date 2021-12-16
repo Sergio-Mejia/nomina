@@ -30,23 +30,23 @@
                 <hr class="bg bg-light">
                 <div class="col-md-12">
                     <label class="form-label">Cedula</label>
-                    <td><input type="number" name="cedula" id="cedula" class="form-control"></td>
+                    <td><input type="number" name="cedula" id="cedula" class="form-control" required></td>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Monto</label>
-                    <td><input type="number" name="monto" id="monto" class="form-control"></td>
+                    <td><input type="number" name="monto" id="monto" class="form-control" required></td>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Cuotas</label>
-                    <td><input type="number" name="cuotas" id="cuotas" class="form-control"></td>
+                    <td><input type="number" name="cuotas" id="cuotas" class="form-control" required></td>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Cuotas Pagadas</label>
-                    <td><input type="number" name="pago" id="pago" class="form-control"></td>
+                    <td><input type="number" name="pago" id="pago" class="form-control" required></td>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Fecha</label>
-                    <td><input type="date" name="fecha" id="fecha" class="form-control"></td>
+                    <td><input type="date" name="fecha" id="fecha" class="form-control" required></td>
                 </div>
                 <div class="col-md-12" align="center">
                     <input type="submit" class="btn btn-success btn-lg" name="enviar" id="enviar" value="Registrar" />
