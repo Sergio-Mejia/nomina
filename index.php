@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Horas Nocturnas</label>
-                    <input type="number" name="arl" id="arl" class="form-control">
+                    <input type="number" name="nocturn" id="nocturn" class="form-control">
                 </div>
                 <div class="col-md-6" align="right">
                     <input type="submit" class="btn btn-success btn-lg" name="enviar" id="enviar" value="Registrarse" />
